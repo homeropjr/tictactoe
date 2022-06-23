@@ -17,13 +17,40 @@ GRID_COL_Y = MARGIN_TOP
 GRID_COL_WIDTH = 4
 GRID_COL_HEIGHT = GRID_HEIGHT
 
+imagePlayer_1 = love.graphics.newImage("Images/o.png")
+imagePlayer_2 = love.graphics.newImage("Images/x.png")
+
 function love.load()
-    love.window.setTitle("Tic Tac Toe")    
+    love.window.setTitle("Tic Tac Toe")
+
+    font = love.graphics.newFont("Fonts/SourceSansPro-Regular.ttf", 48)
+    love.graphics.setFont(font)
 end
 
 function love.draw()    
     drawBoard()
-    drawBoardHover()    
+    love.graphics.setColor(love.math.colorFromBytes(247, 101, 140))
+    love.graphics.print("Player 1", 80, 5)
+    love.graphics.print("Player 2", 400, 5)
+    love.graphics.draw(imagePlayer_1, 260, 15, 0, 0.8, 0.8)
+    love.graphics.draw(imagePlayer_2, 580, 17, 0, 0.7, 0.7)
+
+    drawBoardHover() 
+    
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.draw(imagePlayer_1, MARGIN_LEFT + 12, MARGIN_TOP + 15, 0, 2, 2)
+    love.graphics.draw(imagePlayer_1, GRID_COL_X + 12, MARGIN_TOP + 15, 0, 2, 2)
+    love.graphics.draw(imagePlayer_1, GRID_COL_XX + 12, MARGIN_TOP + 15, 0, 2, 2)
+
+    love.graphics.draw(imagePlayer_2, MARGIN_LEFT + 15, GRID_ROW_Y + 15, 0, 2, 2)
+    love.graphics.draw(imagePlayer_2, GRID_COL_X + 15, GRID_ROW_Y + 15, 0, 2, 2)
+    love.graphics.draw(imagePlayer_2, GRID_COL_XX + 15, GRID_ROW_Y + 15, 0, 2, 2)
+
+    love.graphics.draw(imagePlayer_2, MARGIN_LEFT + 15, GRID_ROW_YY + 15, 0, 2, 2)
+    love.graphics.draw(imagePlayer_2, GRID_COL_X + 15, GRID_ROW_YY + 15, 0, 2, 2)
+    love.graphics.draw(imagePlayer_2, GRID_COL_XX + 15, GRID_ROW_YY + 15, 0, 2, 2)
+
+    --love.graphics.draw(imagePlayer_2, GRID_COL_X, MARGIN_TOP, 0, 2, 2)
 end
 
 function drawBoard()
@@ -75,45 +102,45 @@ function drawBoardHover()
         if mousePosY > MARGIN_TOP and mousePosY < GRID_ROW_Y then
 
             if mousePosX > MARGIN_LEFT and mousePosX < GRID_COL_X then
-                drawSquareHover(MARGIN_LEFT, MARGIN_TOP)
+                drawHover(MARGIN_LEFT, MARGIN_TOP)
 
             elseif mousePosX > GRID_COL_X and mousePosX < GRID_COL_XX then
-                drawSquareHover(GRID_COL_X, MARGIN_TOP)
+                drawHover(GRID_COL_X, MARGIN_TOP)
 
             elseif mousePosX > GRID_COL_XX and  mousePosX < GRID_COL_XX + GRID_HEIGHT then
-                drawSquareHover(GRID_COL_XX, MARGIN_TOP)
+                drawHover(GRID_COL_XX, MARGIN_TOP)
 
             end
 
         elseif mousePosY >  GRID_ROW_Y and mousePosY < GRID_ROW_YY then
 
             if mousePosX > MARGIN_LEFT and mousePosX < GRID_COL_X then
-                drawSquareHover(MARGIN_LEFT, GRID_ROW_Y)        
+                drawHover(MARGIN_LEFT, GRID_ROW_Y)        
 
             elseif mousePosX > GRID_COL_X and mousePosX < GRID_COL_XX then
-                drawSquareHover(GRID_COL_X, GRID_ROW_Y)        
+                drawHover(GRID_COL_X, GRID_ROW_Y)        
 
             elseif mousePosX > GRID_COL_XX and  mousePosX < GRID_COL_XX + GRID_HEIGHT then
-                drawSquareHover(GRID_COL_XX, GRID_ROW_Y)
+                drawHover(GRID_COL_XX, GRID_ROW_Y)
 
             end
 
         elseif mousePosY >  GRID_ROW_YY and mousePosY < GRID_ROW_YY + 148 then
 
             if mousePosX > MARGIN_LEFT and mousePosX < GRID_COL_X then
-                drawSquareHover(MARGIN_LEFT, GRID_ROW_YY)
+                drawHover(MARGIN_LEFT, GRID_ROW_YY)
 
             elseif mousePosX > GRID_COL_X and mousePosX < GRID_COL_XX then
-                drawSquareHover(GRID_COL_X, GRID_ROW_YY)
+                drawHover(GRID_COL_X, GRID_ROW_YY)
 
             elseif mousePosX > GRID_COL_XX and  mousePosX < GRID_COL_XX + GRID_HEIGHT then
-                  drawSquareHover(GRID_COL_XX, GRID_ROW_YY)
+                  drawHover(GRID_COL_XX, GRID_ROW_YY)
             end
         end
     end
 end
 
-function drawSquareHover(x, y)
+function drawHover(x, y)
     love.graphics.setColor(love.math.colorFromBytes(123,94,198))
     love.graphics.rectangle("fill", x + 7, y + 7, 140, 140, 5, 5)
 end
